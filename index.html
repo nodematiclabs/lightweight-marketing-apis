@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Website</title>
+        <style>
+            body {font-family: Arial, sans-serif;}
+            .container {max-width: 800px; margin: 0 auto;}
+            .form-group {margin-bottom: 15px;}
+            .form-group label {display: block;}
+            .form-group input, .form-group textarea {width: 100%; padding: 10px;}
+            button {padding: 10px 20px; background-color: #007BFF; color: white; border: none; cursor: pointer;}
+            button:hover {background-color: #0056b3;}
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Welcome to My Website</h1>
+
+            <!-- Newsletter Signup Form -->
+            <h2>Subscribe to our Newsletter</h2>
+            <form id="newsletter-form">
+                <div class="form-group">
+                    <label for="email">Email address:</label>
+                    <input name="email" type="email" id="email" required />
+                </div>
+                <button type="submit">Subscribe</button>
+            </form>
+
+            <!-- Contact Form -->
+            <h2>Contact Us</h2>
+            <form id="contact-form">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input name="name" type="text" id="name" required />
+                </div>
+                <div class="form-group">
+                    <label for="contact-email">Email address:</label>
+                    <input name="email" type="email" id="contact-email" required />
+                </div>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea name="message" id="message" required></textarea>
+                </div>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+
+        <script>
+            function sendFormData(formId, apiUrl) {
+                const form = document.getElementById(formId);
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault();
+
+                    const formData = new FormData(form);
+
+                    fetch(apiUrl, {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(data => console.log('Success:', data))
+                    .catch((error) => console.error('Error:', error));
+                });
+            }
+
+            sendFormData('newsletter-form', 'https://api.example.com/newsletter-signup');
+            sendFormData('contact-form', 'https://api.example.com/contact-us');
+        </script>
+    </body>
+</html>
